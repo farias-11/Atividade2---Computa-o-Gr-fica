@@ -4,28 +4,15 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-vertice = (
-    (0,1),
-    (-1,0),
-    (1,0)
-    )
+glBegin(GL_TRIANGLES);
+glVertex2f(0, 1);
+glVertex2f(-1, 0);
+glVertex2f(1, 0);
+glEnd();
 
-aresta = (
-    (0,1),
-    (1,2),
-    (2,0)
-    )
-
-
-def Quadrado():
-    glBegin(GL_LINES)
-
-    for temp_aresta in aresta:
-        for vertex in temp_aresta:
-            glVertex2iv(vertice[vertex])
+def Triangulo():
+    glBegin(GL_TRIANGLES)
     glEnd()
-
-
 def main():
     pygame.init() #Inicialize todos os módulos pygame importados
     display = (700, 700) #Define o tamanho da tela (Plano)
@@ -36,21 +23,19 @@ def main():
                    20 #Distância a ser desenhado.
     )
 
-    glTranslatef(
-        2, #X
-        2, #Y
-        -3  #Z
-    )
+glTranslatef(-2,-2, 0);
+glBegin(GL_TRIANGLES);
+glVertex2f(-2, -1);
+glVertex2f(1, -1);
+glVertex2f(0, 2);
+glEnd();
 
-    glRotatef(80,  # angulo de retação
-              2,  # x
-              0,  # y
-              0  # z
-              )  # Transformação geometrica de rotação
-
-
-
-    glColor3f(1,1,0)
+glRotatef(90, 0, 0, 1);
+glBegin(GL_TRIANGLES);
+glVertex2f(-2, -1);
+glVertex2f(1, -1);
+glVertex2f(0, 2);
+glEnd();
 
     while True:
         for event in pygame.event.get():
@@ -58,11 +43,8 @@ def main():
                 pygame.quit()
                 quit()
 
-
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
-        Quadrado()
+        Triangulo()
         pygame.display.flip()
-        #pygame.time.wait(10)
-
 
 main()
